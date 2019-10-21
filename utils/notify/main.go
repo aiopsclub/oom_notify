@@ -23,10 +23,15 @@ func Dingding(token string, msg string) {
 	response, err := client.Do(request)
 	if err != nil {
 		fmt.Printf("消息发送失败: %s\n", err.Error())
+		return
 	}
 	if response.StatusCode == 200 {
 		p := &DingdingResponse{}
-		body, _ := ioutil.ReadAll(response.Body)
+		body, bodyerr := ioutil.ReadAll(response.Body)
+		if bodyerr != nil {
+			fmt.Println("dingding读取body失败")
+			return
+		}
 		jsonerr := json.Unmarshal([]byte(body), p)
 		if jsonerr != nil {
 			fmt.Println("dingding响应解析失败")
