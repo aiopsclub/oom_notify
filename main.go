@@ -21,7 +21,7 @@ func main() {
 	}
 	// 设置命令行参数
 	flag.StringVar(&dingdingtoken, "token", "", "dingding token")
-	flag.StringVar(&logfile, "logfile", "/var/log/syslog", "system log file")
+	flag.StringVar(&logfile, "logfile", "/dev/kmsg", "system log file")
 	flag.Parse()
 
 	if len(dingdingtoken) <= 0 {
